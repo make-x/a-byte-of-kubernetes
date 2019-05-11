@@ -1,0 +1,62 @@
+### 安装Dashboard
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+
+kubectl proxy
+输出
+Starting to serve on 127.0.0.1:8001
+
+以守护进程方式执行，修改默认端口号，默认端口号为8081
+kubectl proxy --port=8080 &
+
+```
+### 查看Dashboard状态
+```
+[root@master ~]# kubectl get pods -n kube-system
+NAME                                    READY   STATUS             RESTARTS   AGE
+calico-node-422kf                       2/2     Running            0          36m
+calico-node-gvn6n                       2/2     Running            0          42m
+coredns-8686dcc4fd-k5r62                1/1     Running            0          47m
+coredns-8686dcc4fd-x5vmj                1/1     Running            0          47m
+etcd-master                             1/1     Running            0          46m
+kube-apiserver-master                   1/1     Running            0          46m
+kube-controller-manager-master          1/1     Running            0          46m
+kube-proxy-nq6gn                        1/1     Running            0          47m
+kube-proxy-z5nc2                        1/1     Running            0          36m
+kube-scheduler-master                   1/1     Running            0          46m
+kubernetes-dashboard-5f7b999d65-59gg8   0/1     ImagePullBackOff   0          12m
+```
+
+
+### 看看ImagePullBackOff是什么情况
+```
+kubectl describe pods kubernetes-dashboard-5f7b999d65-59gg8 -n kube-system
+
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  13m                  default-scheduler  Successfully assigned kube-system/kubernetes-dashboard-5f7b999d65-59gg8 to master
+  Warning  Failed     12m                  kubelet, master    Failed to pull image "k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1": rpc error: code = Unknown desc = Get https://k8s.gcr.io/v1/_ping: dial tcp 108.177.125.82:443: i/o timeout
+  Normal   Pulling    10m (x4 over 13m)    kubelet, master    Pulling image "k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1"
+  Warning  Failed     9m35s (x3 over 13m)  kubelet, master    Failed to pull image "k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1": rpc error: code = Unknown desc = Get https://k8s.gcr.io/v1/_ping: dial tcp 74.125.204.82:443: i/o timeout
+  Normal   BackOff    8m57s (x7 over 13m)  kubelet, master    Back-off pulling image "k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1"
+  Warning  Failed     8m57s (x7 over 13m)  kubelet, master    Error: ImagePullBackOff
+  Warning  Failed     3m38s (x6 over 13m)  kubelet, master    Error: ErrImagePull
+```
+
+```
+docker pull registry.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:v1.10.1
+
+docker tag registry.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:v1.10.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
+```
+
+然后等一下就好了
+
+Dashboard 是不可以暴露带外网的，但是好像也可以做到
+```
+https://time.geekbang.org/column/article/39724
+这篇文章有讲
+说要用到Ingress
+
+
+```
