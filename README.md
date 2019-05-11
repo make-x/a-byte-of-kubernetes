@@ -2,7 +2,7 @@
 
 ## 简明Kubernetes教程
 
-Learn by doing , step by step , without proxy
+Learn by doing , step by step ，猴子都能懂 
 
 
 * github https://github.com/cheerego/a-byte-of-kubernetes
