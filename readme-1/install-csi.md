@@ -1,16 +1,16 @@
+# 2.3.安装存储插件
 
 `https://time.geekbang.org/column/article/39724`
 
 按照极客时间的是无法安装成功的，报一个 not namespace 的错无，应该是太旧了
 
-官方文档 `https://rook.io/docs/rook/v1.0/ceph-quickstart.html`
-极客时间使用的是ceph
+官方文档 `https://rook.io/docs/rook/v1.0/ceph-quickstart.html` 极客时间使用的是ceph
 
 rook 文档写的：Ceph是一种高度可扩展的分布式存储解决方案，适用于具有多年生产部署的块存储，对象存储和共享文件系统。
 
 ceph 还包含一些仪表盘检测状态相关的功能。
 
-```
+```text
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/common.yaml
 输出
 [root@master ~]# kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/common.yaml
@@ -56,12 +56,11 @@ kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/cluster/exam
 输出
 [root@master ~]# kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/cluster.yaml
 cephcluster.ceph.rook.io/rook-ceph created
-
-
 ```
 
-### 获取rook状态
-```
+## 获取rook状态
+
+```text
 kubectl -n rook-ceph get pod
 多刷新几次，到全部都都是run为止
 [root@master ~]# kubectl -n rook-ceph get pod
@@ -77,5 +76,5 @@ rook-discover-httwv                   1/1     Running   0          56s
 看到这样的状态应该是安装好了
 
 装了再说 反正不会用
-
 ```
+

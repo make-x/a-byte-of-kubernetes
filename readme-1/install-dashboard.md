@@ -1,5 +1,8 @@
-### 安装Dashboard
-```
+# 2.2.安装Dashboard
+
+## 安装Dashboard
+
+```text
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
 kubectl proxy
@@ -8,10 +11,11 @@ Starting to serve on 127.0.0.1:8001
 
 以守护进程方式执行，修改默认端口号，默认端口号为8081
 kubectl proxy --port=8080 &
+```
 
-```
-### 查看Dashboard状态
-```
+## 查看Dashboard状态
+
+```text
 [root@master ~]# kubectl get pods -n kube-system
 NAME                                    READY   STATUS             RESTARTS   AGE
 calico-node-422kf                       2/2     Running            0          36m
@@ -27,9 +31,9 @@ kube-scheduler-master                   1/1     Running            0          46
 kubernetes-dashboard-5f7b999d65-59gg8   0/1     ImagePullBackOff   0          12m
 ```
 
+## 看看ImagePullBackOff是什么情况
 
-### 看看ImagePullBackOff是什么情况
-```
+```text
 kubectl describe pods kubernetes-dashboard-5f7b999d65-59gg8 -n kube-system
 
 Events:
@@ -44,7 +48,7 @@ Events:
   Warning  Failed     3m38s (x6 over 13m)  kubelet, master    Error: ErrImagePull
 ```
 
-```
+```text
 docker pull registry.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:v1.10.1
 
 docker tag registry.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:v1.10.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
@@ -53,10 +57,10 @@ docker tag registry.aliyuncs.com/google_containers/kubernetes-dashboard-amd64:v1
 然后等一下就好了
 
 Dashboard 是不可以暴露带外网的，但是好像也可以做到
-```
+
+```text
 https://time.geekbang.org/column/article/39724
 这篇文章有讲
 说要用到Ingress
-
-
 ```
+
