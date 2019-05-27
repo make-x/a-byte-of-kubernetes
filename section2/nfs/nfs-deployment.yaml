@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-deployment
+  labels:
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 3
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: nginx-nfs-vol
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      volumes:
+        - name: nginx-nfs-vol
+          nfs:
+            path: /nfs-share/nginx
+            server: 172.26.9.41
