@@ -6,11 +6,11 @@ metadata:
     pv : nginx-nfs-pv
 spec:
   capacity:
-    storage: 10Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /nfs-share/nginx
+    path: /nfs-share
     server: 172.26.9.41
 
 
