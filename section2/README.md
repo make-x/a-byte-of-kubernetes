@@ -1,5 +1,5 @@
 * [安装](README.md)
   * [2.1.安装Master和Node](2.1.install-master.md)
   * [2.2.安装Dashboard](2.2.install-dashboard.md)
-  * [2.3.安装Rook](2.3.install-rook.md)
+  * [2.3.安装Rook-Ceph](2.3.install-rook-ceph.md)
   * [2.4.安装NFS](2.4.install-nfs.md)
