@@ -5,7 +5,7 @@
   * [2.1.安装Master和Node](section2/2.1.install-master.md)
   * [2.2.安装Dashboard](section2/2.2.install-dashboard.md)
   * [2.3.安装Rook-Ceph](section2/2.3.install-rook-ceph.md)
-  * [2.3.安装NFS](section2/2.4.install-nfs.md)
+  * [2.4.安装NFS](section2/2.4.install-nfs.md)
   
 * [3.概念](section3/README.md)
   * [3.1.基础概念](section3/3.1.base.md)
