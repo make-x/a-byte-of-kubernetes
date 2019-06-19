@@ -12,6 +12,7 @@
   * [3.1.基础概念](section3/3.1.base.md)
 * [4.小技巧](section4/README.md)
   * [4.1.常用命令](section4/1.kubectl-cheet-sheet.md)   
+  * [4.2.K9S](section4/2.k9s.md)   
     
 * [3. kubernetes种种概念](3.-kubernetes-zhong-zhong-gai-nian.md)
 * [4. 储存插件 Rook & ceph](4.Rook&ceph.md)
