@@ -1,0 +1,6 @@
+version: "3.7"
+services:
+  master:
+    image: redis
+  slave1:
+    image: redis
