@@ -1,6 +1,41 @@
 version: "3.7"
 services:
-  master:
-    image: redis
+  master1:
+    build:
+      context: ./redis
+    networks:
+      - redis-net
+  master2:
+    build:
+      context: ./redis
+    networks:
+      - redis-net
+  master3:
+    build:
+      context: ./redis
+    networks:
+      - redis-net
   slave1:
-    image: redis
+    build:
+      context: ./redis
+    networks:
+      - redis-net
+  slave2:
+    build:
+      context: ./redis
+    networks:
+      - redis-net
+  slave3:
+    build:
+      context: ./redis
+    networks:
+      - redis-net
+
+networks:
+  redis-net:
+    driver: bridge
+
+
+#  docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq) | grep redis
+#  redis-cli --cluster create  172.25.0.2:6379 172.25.0.3:6379 172.25.0.4:6379 172.25.0.5:6379 172.25.0.6:6379 172.25.0.7:6379 --cluster-replicas 1
+#  redis-cli --cluster create master1:6379 master2:6379 master3:6379 slave1:6379 slave2:6379 slave3:6379 --cluster-replicas 1
