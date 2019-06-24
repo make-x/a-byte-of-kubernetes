@@ -1,0 +1,136 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config-map
+data:
+  redis.conf: |+
+    appendonly yes
+    cluster-enabled yes
+    cluster-config-file /var/lib/redis/nodes.conf
+    cluster-node-timeout 5000
+    dir /var/lib/redis
+    port 6379
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  labels:
+    app: redis
+spec:
+  ports:
+    - name: redis-port
+      port: 6379
+  clusterIP: None
+  selector:
+    app: redis
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-stateful-set
+  labels:
+    app: redis-stateful-set
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: redis
+  serviceName: 'redis-cluster-service'
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          volumeMounts:
+            - mountPath: /conf
+              name: conf
+
+      volumes:
+        - name: redis-conf
+          configMap:
+            name: redis.conf
+
+
+#apiVersion: apps/v1
+#kind: StatefulSet
+#metadata:
+#  name: redis-cluster
+#  labels:
+#    app: redis-cluster
+#spec:
+#  serviceName: redis-cluster
+#  replicas: 6
+#  selector:
+#    matchLabels:
+#      app: redis-cluster
+#  template:
+#    metadata:
+#      labels:
+#        app: redis-cluster
+#    spec:
+#      containers:
+#        - name: redis
+#          image: redis
+#          ports:
+#            - containerPort: 6379
+#              name: client
+#          command: ["/conf/fix-ip.sh", "redis-server", "/conf/redis.conf"]
+#          resources:
+#            limits:
+#              cpu: "2"
+#              memory: 1Gi
+#            requests:
+#              cpu: "1"
+#              memory: 1Gi
+#          readinessProbe:
+#            exec:
+#              command:
+#                - sh
+#                - -c
+#                - "redis-cli -h $(hostname) ping"
+#            initialDelaySeconds: 15
+#            timeoutSeconds: 5
+#          livenessProbe:
+#            exec:
+#              command:
+#                - sh
+#                - -c
+#                - "redis-cli -h $(hostname) ping"
+#            initialDelaySeconds: 20
+#            periodSeconds: 3
+#          env:
+#            - name: POD_IP
+#              valueFrom:
+#                fieldRef:
+#                  fieldPath: status.podIP
+#          volumeMounts:
+#            - name: conf
+#              mountPath: /conf
+#              readOnly: false
+#            - name: data
+#              mountPath: /data
+#              readOnly: false
+#      volumes:
+#        - name: conf
+#          configMap:
+#            name: redis-cluster
+#            defaultMode: 0755
+#  volumeClaimTemplates:
+#    - metadata:
+#        name: data
+#        labels:
+#          name: redis-cluster
+#      spec:
+#        accessModes:
+#          - ReadWriteOnce
+#        resources:
+#          requests:
+#            storage: 100Mi
+#
+
