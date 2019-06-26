@@ -3,3 +3,5 @@
   * [2.2.安装Dashboard](2.2.install-dashboard.md)
   * [2.3.安装Rook-Ceph](2.3.install-rook-ceph.md)
   * [2.4.安装NFS](2.4.install-nfs.md)
+  * [2.5.安装MySQL集群](2.5.install-mysql-master-slave.md)
+  * [2.6.安装Redis集群](2.6.install-redis-cluster.md)

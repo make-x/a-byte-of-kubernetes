@@ -7,6 +7,7 @@
   * [2.3.安装Rook-Ceph](section2/2.3.install-rook-ceph.md)
   * [2.4.安装NFS](section2/2.4.install-nfs.md)
   * [2.5.安装MySQL主从集群](section2/2.5.install-mysql-master-slave.md)
+  * [2.6.安装Redis集群](section2/2.6.install-redis-cluster.md)
   
 * [3.概念](section3/README.md)
   * [3.1.基础概念](section3/3.1.base.md)
