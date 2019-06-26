@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: redis-ingress
+  labels:
+    app: redis
+spec:
+  backend:
+    serviceName: redis-service
+    servicePort: 6379

@@ -31,7 +31,7 @@ kind: StatefulSet
 metadata:
   name: redis-stateful-set
   labels:
-    app: redis-stateful-set
+      app: redis
 spec:
   replicas: 6
   selector:
