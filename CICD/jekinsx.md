@@ -31,6 +31,10 @@ jx install --provider=kubernetes --on-premise  --git-provider-url=https://gitlab
 
 ### 切换helm源
 ```yaml
+https://jenkins-x.io/faq/issues/
+
+
+
 ➜  ~ helm repo list
 NAME     	URL
 stable   	https://kubernetes-charts.storage.googleapis.com
@@ -47,7 +51,7 @@ helm repo add stable http://mirror.azure.cn/kubernetes/charts
 ```
 
 
-![Alt text](../media/20190701161121.jpg)
+![](../media/20190701161121.jpg)
 
 ### 可能会遇到的问题
 
@@ -59,12 +63,14 @@ mv helm-v2.14.1-linux-amd64.tar.gz helm.tgz
 ```
 
 * k8s.gcr.io/defaultbackend:1.4 下载不下来
+
 ```
 docker pull registry.aliyuncs.com/google_containers/defaultbackend:1.4 && \
 docker tag registry.aliyuncs.com/google_containers/defaultbackend:1.4 k8s.gcr.io/defaultbackend:1.4
 ```
 
 * kubectl get pod no resouce found
+
 ```
 jenkins x 的吧默认的namespace给改了
 vim ~/.kube/config
@@ -79,6 +85,6 @@ vim ~/.kube/config
 ```bash
 mkdir -p /root/.jx/draft/packs/github.com/jenkins-x-buildpacks
 cd /root/.jx/draft/packs/github.com/jenkins-x-buildpacks
-git clone git clone  https://github.com/jenkins-x-buildpacks/jenkins-x-kubernetes.git
+git clone  https://github.com/jenkins-x-buildpacks/jenkins-x-kubernetes.git
 ```
 
