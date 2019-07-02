@@ -18,4 +18,5 @@
 * [3. kubernetes种种概念](3.-kubernetes-zhong-zhong-gai-nian.md)
 * [4. 储存插件 Rook & ceph](4.Rook&ceph.md)
 * [5. Liveness and Readinss probes](5.LivenessandReadinss-probes.md)
+* [6.Jenkins-X](CICD/jekinsx.md)
 
