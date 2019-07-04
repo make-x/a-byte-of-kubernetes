@@ -11,3 +11,11 @@ https://github.com/shadowsocksrr/shadowsocks-rss/wiki/libsodium
 
 https://www.5yun.org/14197.html
 
+
+
+守护进程启动
+
+vim /etc/rc.d/rc.local
+nohup sslocal -c ~/shadowsocks/shadowsocks.json &
+privoxy --user privoxy /etc/privoxy/config
+
