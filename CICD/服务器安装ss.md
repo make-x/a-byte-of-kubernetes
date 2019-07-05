@@ -19,3 +19,7 @@ vim /etc/rc.d/rc.local
 nohup sslocal -c ~/shadowsocks/shadowsocks.json &
 privoxy --user privoxy /etc/privoxy/config
 
+
+
+
+jx install --provider alibaba --default-admin-password=admin --default-environment-prefix=jx-rocks-china --tekton --docker-registry=registry.cn-beijing.aliyuncs.com --docker-registry-org=jx-rocks --cloud-environment-repo=https://github.com/carlossg/jenkins-x-cloud-environments-alibaba-china.git -b 
