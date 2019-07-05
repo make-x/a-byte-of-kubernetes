@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  namespace: istio-system
+  name: baidu
+spec:
+  hosts:
+    - www.baidu.com
+  ports:
+    - number: 443
+      name: https
+      protocol: HTTPS
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: istio-system
+  name: baidu
+spec:
+  hosts:
+    - www.baidu.com
+  tls:
+    - match:
+        - port: 443
+          sni_hosts:
+            - www.baidu.com
+      route:
+        - destination:
+            host: www.baidu.com
+            port:
+              number: 443
+          weight: 100

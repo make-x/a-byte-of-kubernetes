@@ -4,6 +4,7 @@ metadata:
   name: jenkins
   labels:
     app: jenkins
+    version: 1.0.1
 spec:
   selector:
     matchLabels:
@@ -18,6 +19,9 @@ spec:
       containers:
         - name: jenkins
           image: jenkins/jenkins:lts
+          ports:
+            - containerPort: 8080
+              name: jenkins-web
           volumeMounts:
             - name: jenkins-home
               subPath: jenkins2
