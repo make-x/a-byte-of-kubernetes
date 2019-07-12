@@ -27,6 +27,8 @@ https://github.com/jenkins-x/jx/issues/1026
 
 
 jx install --provider=kubernetes --on-premise  --git-provider-url=https://gitlab.com  --docker-registry=gcr.azk8s.cn
+
+jx upgrade ingress --cluster
 ```
 
 ### 切换helm源
@@ -90,4 +92,50 @@ git clone  https://github.com/jenkins-x-buildpacks/jenkins-x-kubernetes.git
 
 
 
-jx install --provider alibaba --default-admin-password=admin --default-environment-prefix=jx-rocks-china --tekton --docker-registry=registry.cn-beijing.aliyuncs.com --docker-registry-org=jx-rocks --cloud-environment-repo=https://github.com/carlossg/jenkins-x-cloud-environments-alibaba-china.git -b
+jx install --provider alibaba   --docker-registry=registry.cn-beijing.aliyuncs.com --docker-registry-org=jx-rocks --cloud-environment-repo=https://github.com/carlossg/jenkins-x-cloud-environments-alibaba-china.git -b
+
+
+
+
+jx install --provider=kubernetes --on-premise \
+             --cloud-environment-repo=https://github.com/AliyunContainerService/cloud-environments.git
+              
+jx install --provider=kubernetes --on-premise \
+             --cloud-environment-repo=https://github.com/carlossg/jenkins-x-cloud-environments-alibaba-china.git 
+
+
+
+kubectl apply  -f - <<EOF
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: baidu
+spec:
+  hosts:
+  - baidu.com
+  ports:
+  - number: 443
+    name: https
+    protocol: HTTPS
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: baidu
+spec:
+  hosts:
+  - baidu.com
+  tls:
+  - match:
+    - port: 443
+      sni_hosts:
+      - baidu.com
+    route:
+    - destination:
+        host: baidu.com
+        port:
+          number: 443
+      weight: 100
+EOF
