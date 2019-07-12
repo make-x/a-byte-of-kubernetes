@@ -12,7 +12,7 @@ mkdir helm
 tar zxvf helm-v2.14.1-linux-amd64.tar.gz -C helm
 将解压的文件 helm和tiller mv到/usr/local/bin
 
-helm init --history-max 200  --stable-repo-url https://charts.ost.aihle
+helm init --history-max 200  --stable-repo-url http://mirror.azure.cn/kubernetes/charts/
 
 这个--history-max是保留的最大历史记录，如果不限制就会无限增大
 
